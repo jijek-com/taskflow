@@ -1,0 +1,31 @@
+<nz-list
+  [nzDataSource]="tasks"
+  [nzBordered]="true"
+  [nzRenderItem]="item"
+>
+  <ng-template #item let-task>
+    <nz-list-item>
+      <nz-list-item-meta
+        [nzTitle]="task.title"
+        [nzDescription]="task.description"
+      ></nz-list-item-meta>
+      <div>
+        <span [ngClass]="{
+          'status-completed': task.status === 'completed',
+          'status-in-progress': task.status === 'in-progress',
+          'status-pending': task.status === 'pending'
+        }">{{ statusesTranslations[task.status] }}</span>
+      </div>
+      <button nz-button nzType="link" (click)="openEditModal(task)">
+        Редактировать
+      </button>
+    </nz-list-item>
+  </ng-template>
+</nz-list>
+
+<app-task-edit
+  [isVisible]="isEditModalVisible"
+  [task]="selectedTask"
+  (onCancel)="closeEditModal()"
+  (onSave)="updateTask($event)"
+></app-task-edit>

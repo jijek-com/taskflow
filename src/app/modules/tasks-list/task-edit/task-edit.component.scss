@@ -1,0 +1,18 @@
+
+.modal__form-control {
+  margin-top: 12px;
+  display: flex;
+  flex-direction: column;
+
+  &:first-child {
+    margin-top: 0;
+  }
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 16px;
+  margin-top: 24px;
+}
+

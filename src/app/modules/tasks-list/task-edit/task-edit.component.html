@@ -1,0 +1,48 @@
+<nz-modal
+  [(nzVisible)]="isVisible"
+  nzTitle="Редактировать задачу"
+  (nzOnCancel)="cancel()"
+  [nzFooter]="null"
+  class="modal"
+>
+  <div class="modal__body" *nzModalContent>
+    <div class="modal__container">
+      <form *ngIf="form" [formGroup]="form" (ngSubmit)="submitForm()">
+        <div class="modal__form-control">
+          <label nz-form-label>Название</label>
+          <input nz-input formControlName="title" placeholder="Название" />
+        </div>
+
+        <div class="modal__form-control">
+          <label nz-form-label>Описание</label>
+          <textarea
+            nz-input
+            formControlName="description"
+            placeholder="Описание"
+          ></textarea>
+        </div>
+
+        <div class="modal__form-control">
+          <label for="status">Статус</label>
+          <select
+            id="status"
+            nz-select
+            formControlName="status"
+            class="modal__form-select"
+          >
+            <option *ngFor="let status of statuses" [value]="status">
+              {{ statusesTranslations[status] }}
+            </option>
+          </select>
+        </div>
+
+        <div class="modal-footer">
+          <button nz-button nzType="default" (click)="cancel()">Отмена</button>
+          <button nz-button nzType="primary" [disabled]="!form.valid">
+            Сохранить
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</nz-modal>
