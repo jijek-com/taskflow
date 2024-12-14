@@ -1,1 +1,48 @@
-<p>tasks-list-v2 works!</p>
+<div class="actions">
+  <button nz-button nzType="primary" (click)="openAddModal()">Добавить задачу</button>
+</div>
+
+<nz-list
+  [nzDataSource]="tasks"
+  [nzBordered]="true"
+  [nzRenderItem]="item"
+>
+  <ng-template #item let-task>
+    <nz-list-item>
+      <nz-list-item-meta
+        [nzTitle]="task.title"
+        [nzDescription]="task.description"
+      ></nz-list-item-meta>
+      <div>
+        <span [ngClass]="{
+          'status-completed': task.status === 'completed',
+          'status-in-progress': task.status === 'in-progress',
+          'status-pending': task.status === 'pending'
+        }">{{ statusesTranslations[task.status] }}</span>
+      </div>
+      <button
+        nz-button
+        nzType="link"
+        (click)="openEditModal(task)"
+        title="Редактировать"
+      >
+        <i nz-icon nzType="edit" nzTheme="outline"></i>
+      </button>
+
+      <button
+        nz-button
+        nzType="link"
+        nzDanger
+        (click)="deleteTask(task.id)"
+        title="Удалить"
+      >
+        <i nz-icon nzType="delete" nzTheme="outline"></i>
+      </button>
+    </nz-list-item>
+  </ng-template>
+</nz-list>
+
+
+<app-task-add [isVisible]="isAddModalVisible" (onCancel)="closeAddModal()"></app-task-add>
+<app-task-edit [isVisible]="isEditModalVisible" [task]="selectedTask" (onCancel)="closeEditModal()"></app-task-edit>
+

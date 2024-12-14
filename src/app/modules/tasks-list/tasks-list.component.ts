@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { Task } from "./tasks-list.type";
 import { Statuses_Translations } from "./tasks-list-translations";
+import { Task } from 'src/app/types/tasks.type';
 
 @Component({
   selector: 'app-tasks-list',

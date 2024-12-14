@@ -8,9 +8,8 @@ import {
 
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 
-import { Task } from '../tasks-list.type';
-
 import { Statuses_Translations } from "../tasks-list-translations";
+import { Task } from 'src/app/types/tasks.type';
 
 @Component({
   selector: 'app-task-edit',
