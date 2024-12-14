@@ -1,3 +1,7 @@
+<div class="actions">
+  <button nz-button nzType="primary" (click)="openAddModal()">Добавить задачу</button>
+</div>
+
 <nz-list
   [nzDataSource]="tasks"
   [nzBordered]="true"
@@ -16,12 +20,33 @@
           'status-pending': task.status === 'pending'
         }">{{ statusesTranslations[task.status] }}</span>
       </div>
-      <button nz-button nzType="link" (click)="openEditModal(task)">
-        Редактировать
+      <button
+        nz-button
+        nzType="link"
+        (click)="openEditModal(task)"
+        title="Редактировать"
+      >
+        <i nz-icon nzType="edit" nzTheme="outline"></i>
+      </button>
+
+      <button
+        nz-button
+        nzType="link"
+        nzDanger
+        (click)="deleteTask(task.id)"
+        title="Удалить"
+      >
+        <i nz-icon nzType="delete" nzTheme="outline"></i>
       </button>
     </nz-list-item>
   </ng-template>
 </nz-list>
+
+<app-task-add
+  [isVisible]="isAddModalVisible"
+  (onCancel)="closeAddModal()"
+  (onSave)="addTask($event)"
+></app-task-add>
 
 <app-task-edit
   [isVisible]="isEditModalVisible"

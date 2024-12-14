@@ -11,6 +11,10 @@ import { NzInputModule } from "ng-zorro-antd/input";
 
 import { TasksListComponent } from "./tasks-list.component";
 import { TaskEditComponent } from './task-edit/task-edit.component';
+import { TaskAddComponent } from './task-add/task-add.component';
+import { NzFormModule } from "ng-zorro-antd/form";
+import { NzSelectModule } from "ng-zorro-antd/select";
+import { NzIconModule } from "ng-zorro-antd/icon";
 
 const routes: Routes = [
   { path: '', component: TasksListComponent },
@@ -19,7 +23,8 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     TasksListComponent,
-    TaskEditComponent
+    TaskAddComponent,
+    TaskEditComponent,
   ],
   imports: [
     CommonModule,
@@ -29,6 +34,9 @@ const routes: Routes = [
     NzInputModule,
     NzListModule,
     NzModalModule,
+    NzFormModule,
+    NzSelectModule,
+    NzIconModule,
   ],
 })
 export class TasksListModule {}

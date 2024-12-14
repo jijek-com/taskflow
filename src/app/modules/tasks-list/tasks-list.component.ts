@@ -1,6 +1,6 @@
-import {ChangeDetectionStrategy, Component} from '@angular/core';
-import {Task} from "./tasks-list.type";
-import {Statuses_Translations} from "./tasks-list-translations";
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { Task } from "./tasks-list.type";
+import { Statuses_Translations } from "./tasks-list-translations";
 
 @Component({
   selector: 'app-tasks-list',
@@ -15,8 +15,25 @@ export class TasksListComponent {
     { id: 3, title: 'Задача 3', description: 'Описание 3', status: 'pending' },
   ];
   public selectedTask: Task | null = null;
+
+  public isAddModalVisible = false;
   public isEditModalVisible = false;
   public statusesTranslations = Statuses_Translations;
+
+  public openAddModal(): void {
+    this.isAddModalVisible = true;
+  }
+
+  public closeAddModal(): void {
+    this.isAddModalVisible = false;
+  }
+
+  public addTask(newTask: any): void {
+    newTask.id = this.tasks.length ? Math.max(...this.tasks.map((t) => t.id)) + 1 : 1;
+    this.tasks = [...this.tasks, newTask];
+
+    this.closeAddModal();
+  }
 
   public openEditModal(task: Task): void {
     this.selectedTask = task;
@@ -33,5 +50,9 @@ export class TasksListComponent {
       t.id === updatedTask.id ? updatedTask : t
     );
     this.closeEditModal();
+  }
+
+  public deleteTask(taskId: number): void {
+    this.tasks = this.tasks.filter((task) => task.id !== taskId);
   }
 }

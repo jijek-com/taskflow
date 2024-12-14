@@ -1,48 +1,51 @@
 <nz-modal
   [(nzVisible)]="isVisible"
   nzTitle="Редактировать задачу"
-  (nzOnCancel)="cancel()"
+  (nzOnCancel)="onCancel.emit()"
   [nzFooter]="null"
-  class="modal"
 >
   <div class="modal__body" *nzModalContent>
-    <div class="modal__container">
-      <form *ngIf="form" [formGroup]="form" (ngSubmit)="submitForm()">
-        <div class="modal__form-control">
-          <label nz-form-label>Название</label>
-          <input nz-input formControlName="title" placeholder="Название" />
-        </div>
+    <form [formGroup]="form">
 
-        <div class="modal__form-control">
-          <label nz-form-label>Описание</label>
+      <nz-form-item>
+        <nz-form-label [nzSpan]="6">Название</nz-form-label>
+        <nz-form-control [nzSpan]="14">
+          <input nz-input formControlName="title" placeholder="Название" />
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label [nzSpan]="6">Описание</nz-form-label>
+        <nz-form-control [nzSpan]="14">
           <textarea
             nz-input
             formControlName="description"
             placeholder="Описание"
           ></textarea>
-        </div>
+        </nz-form-control>
+      </nz-form-item>
 
-        <div class="modal__form-control">
-          <label for="status">Статус</label>
-          <select
-            id="status"
-            nz-select
-            formControlName="status"
-            class="modal__form-select"
-          >
-            <option *ngFor="let status of statuses" [value]="status">
-              {{ statusesTranslations[status] }}
-            </option>
-          </select>
-        </div>
+      <nz-form-item>
+        <nz-form-label [nzSpan]="6">Статус</nz-form-label>
+        <nz-form-control [nzSpan]="14">
+          <nz-select formControlName="status">
+            <nz-option
+              *ngFor="let status of statuses"
+              [nzValue]="status"
+              [nzLabel]="statusesTranslations[status]"
+            ></nz-option>
+          </nz-select>
+        </nz-form-control>
+      </nz-form-item>
 
-        <div class="modal-footer">
-          <button nz-button nzType="default" (click)="cancel()">Отмена</button>
-          <button nz-button nzType="primary" [disabled]="!form.valid">
-            Сохранить
-          </button>
-        </div>
-      </form>
-    </div>
+      <div class="modal-footer">
+        <button nz-button nzType="default" (click)="onCancel.emit()">
+          Отмена
+        </button>
+        <button nz-button nzType="primary" [disabled]="!form.valid" (click)="saveTask()">
+          Сохранить
+        </button>
+      </div>
+    </form>
   </div>
 </nz-modal>

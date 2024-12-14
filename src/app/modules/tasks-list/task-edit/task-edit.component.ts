@@ -47,11 +47,7 @@ export class TaskEditComponent implements OnChanges {
     }
   }
 
-  public cancel(): void {
-    this.onCancel.emit();
-  }
-
-  public submitForm(): void {
+  public saveTask(): void {
     if (this.task && this.form.valid) {
       this.onSave.emit({ ...this.task, ...this.form.value });
     }
