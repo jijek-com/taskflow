@@ -14,12 +14,12 @@
     <ul nz-menu nzTheme="dark" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
       <li nz-submenu nzOpen nzTitle="Dashboard" nzIcon="dashboard">
         <ul>
-<!--          <li nz-menu-item [nzSelected]="isCurrentRoute('/widgets')">-->
-<!--            <a routerLink="/widgets">Виджеты</a>-->
-<!--          </li>-->
-<!--          <li nz-menu-item [nzSelected]="isCurrentRoute('/projects')">-->
-<!--            <a routerLink="/projects">Проекты</a>-->
-<!--          </li>-->
+          <li nz-menu-item [nzSelected]="isCurrentRoute('/tasks-list')">
+            <a routerLink="/tasks-list">Задачи (callback)</a>
+          </li>
+          <li nz-menu-item [nzSelected]="isCurrentRoute('/tasks-list-v2')">
+            <a routerLink="/tasks-list-v2">Задачи (observer)</a>
+          </li>
         </ul>
       </li>
     </ul>
