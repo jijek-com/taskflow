@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import {TasksListModule} from "./modules/tasks-list/tasks-list.module";
 
 const routes: Routes = [
   {
@@ -12,6 +11,11 @@ const routes: Routes = [
     path: 'tasks-list-v2',
     loadChildren: () =>
       import('./modules/tasks-list-v2/tasks-list-v2.module').then((m) => m.TasksListV2Module),
+  },
+  {
+    path: 'tasks-list-v3',
+    loadChildren: () =>
+      import('./modules/tasks-list-v3/tasks-list-v3.module').then((m) => m.TasksListV3Module),
   }
 ];
 

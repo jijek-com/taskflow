@@ -1,6 +1,5 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { TasksListV2Service } from "../tasks-list-v2-service";
 
 @Component({
   selector: 'app-task-add',
@@ -10,11 +9,13 @@ import { TasksListV2Service } from "../tasks-list-v2-service";
 })
 export class TaskAddComponent {
   @Input() public isVisible = false;
+  @Input() public nameChannel = '';
   @Output() public onCancel = new EventEmitter<void>();
+  @Output() public onSave = new EventEmitter<any>();
 
   public taskForm: FormGroup;
 
-  constructor(private _fb: FormBuilder, private _taskStateService: TasksListV2Service) {
+  constructor(private _fb: FormBuilder) {
     this.taskForm = this._fb.group({
       title: ['', Validators.required],
       description: [''],
@@ -23,10 +24,8 @@ export class TaskAddComponent {
   }
 
   public saveTask(): void {
-    if (this.taskForm.valid) {
-      this._taskStateService.addTask(this.taskForm.value);
-      this.taskForm.reset({ status: 'pending' });
-      this.onCancel.emit();
-    }
+    this.onSave.emit(this.taskForm.value);
+    this.taskForm.reset({ status: 'pending' });
+    this.onCancel.emit();
   }
 }

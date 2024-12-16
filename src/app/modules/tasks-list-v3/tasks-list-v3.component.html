@@ -33,7 +33,7 @@
         nz-button
         nzType="link"
         nzDanger
-        (click)="deleteTask(task.id)"
+        (click)="deleteTask(task)"
         title="Удалить"
       >
         <i nz-icon nzType="delete" nzTheme="outline"></i>
@@ -42,6 +42,11 @@
   </ng-template>
 </nz-list>
 
-<app-task-add [isVisible]="isAddModalVisible" (onCancel)="closeAddModal()"></app-task-add>
-<app-task-edit [isVisible]="isEditModalVisible" [task]="selectedTask" (onCancel)="closeEditModal()"></app-task-edit>
+<app-task-add [isVisible]="isAddModalVisible"
+              (onSave)="addTask($event)"
+              (onCancel)="closeAddModal()" [nameChannel]="nameChannel"></app-task-add>
+
+<app-task-edit [isVisible]="isEditModalVisible"
+               (onSave)="updateTask($event)"
+               [task]="selectedTask" (onCancel)="closeEditModal()"></app-task-edit>
 

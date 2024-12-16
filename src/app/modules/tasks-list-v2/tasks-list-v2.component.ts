@@ -12,11 +12,13 @@ import { Task } from 'src/app/types/tasks.type';
   styleUrls: ['./tasks-list-v2.component.scss']
 })
 export class TasksListV2Component implements OnInit, OnDestroy {
-  public tasks: Task[] = [
+  public taskList: Task[] = [
     { id: 1, title: 'Задача 1', description: 'Описание 1', status: 'completed' },
     { id: 2, title: 'Задача 2', description: 'Описание 2', status: 'in-progress' },
     { id: 3, title: 'Задача 3', description: 'Описание 3', status: 'pending' },
   ];
+
+  public tasks: Task[] = []
 
   public selectedTask: Task | null = null;
   public isAddModalVisible = false;
@@ -26,7 +28,7 @@ export class TasksListV2Component implements OnInit, OnDestroy {
   public destroy$ = new Subject<void>();
 
   constructor(private _taskStateService: TasksListV2Service) {
-    this._taskStateService.setTasks(this.tasks)
+    this._taskStateService.setTasks(this.taskList)
   }
 
   public ngOnInit(): void {
