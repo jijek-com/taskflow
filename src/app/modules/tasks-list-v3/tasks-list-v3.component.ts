@@ -20,6 +20,8 @@ export class TasksListV3Component implements OnInit, OnDestroy {
   public isAddModalVisible = false;
   public isEditModalVisible = false;
 
+  private isSynced = false;
+
   public statusesTranslations = Statuses_Translations;
   public destroy$ = new Subject<void>();
 
@@ -29,29 +31,68 @@ export class TasksListV3Component implements OnInit, OnDestroy {
     private _tasksListChannelBroadcast: TasksListChannelBroadcastService) {}
 
   public ngOnInit(): void {
-    this._tasksListService.tasks$.pipe(takeUntil(this.destroy$)).subscribe((tasks) => {
-      this.tasks = tasks;
-      this._cdr.detectChanges();
-    });
-
     this._tasksListChannelBroadcast.onMessage<{ type: TaskOperationType; task?: Task; tasks?: Task[] }>(
       this.nameChannel,
       (message) => {
         if (message.data) {
           switch (message.data.type) {
             case 'ADD':
-              if (message.data.task) this._tasksListService.addTask(message.data.task);
+              if (message.data.task) {
+                this._tasksListService.addTask(message.data.task);
+                this.tasks = [...this.tasks, message.data.task];
+                this._cdr.detectChanges();
+              }
               break;
             case 'UPDATE':
-              if (message.data.task) this._tasksListService.updateTask(message.data.task);
+              if (message.data.task) {
+                this._tasksListService.updateTask(message.data.task);
+                this.tasks = this.tasks.map(task => task.id === message.data.task?.id ? message.data.task : task);
+                this._cdr.detectChanges();
+              }
               break;
             case 'REMOVE':
-              if (message.data.task) this._tasksListService.deleteTask(message.data.task.id);
+              if (message.data.task) {
+                this._tasksListService.deleteTask(message.data.task.id);
+                this.tasks = this.tasks.filter(task => task.id !== message.data.task?.id);
+                this._cdr.detectChanges();
+              }
+              break;
+            case 'SYNC_REQUEST':
+              if (this.tasks.length > 0) {
+                this._tasksListChannelBroadcast.sendMessage(this.nameChannel, {
+                  type: 'SYNC',
+                  tasks: [...this.tasks]
+                });
+                this._cdr.detectChanges();
+              }
+              break;
+            case 'SYNC':
+              if (message.data.tasks && !this.isSynced) {
+                this.tasks = message.data.tasks;
+                this.isSynced = true;
+                this._cdr.detectChanges();
+              }
               break;
           }
         }
       }
     );
+
+    this._tasksListChannelBroadcast.sendMessage(this.nameChannel, { type: 'SYNC_REQUEST', tasks: [] });
+
+    this._tasksListService.tasks$.pipe(takeUntil(this.destroy$)).subscribe((tasks) => {
+
+      if (!this.isSynced) {
+        this.tasks = tasks;
+        this._cdr.detectChanges();
+      }
+
+      if (this.isSynced) {
+        this._tasksListChannelBroadcast.sendMessage(this.nameChannel, { type: 'SYNC_REQUEST', tasks: this.tasks });
+      }
+
+      this._cdr.detectChanges();
+    });
   }
 
   public ngOnDestroy(): void {
@@ -70,8 +111,16 @@ export class TasksListV3Component implements OnInit, OnDestroy {
   }
 
   public addTask(newTask: Task): void {
+    const id = this.tasks.length ? Math.max(...this.tasks.map(t => t.id)) + 1 : 1;
+    this.tasks = [...this.tasks, {...newTask, id}];
+
     this._tasksListService.addTask(newTask);
+
     this._tasksListChannelBroadcast.sendMessage(this.nameChannel, { type: 'ADD', task: newTask });
+    this._tasksListChannelBroadcast.sendMessage(this.nameChannel, {
+      type: 'SYNC',
+      tasks: this.tasks
+    });
   }
 
   public openEditModal(task: Task): void {
@@ -92,13 +141,21 @@ export class TasksListV3Component implements OnInit, OnDestroy {
     this.tasks = this.tasks.map(task => task.id === updatedTask.id ? updatedTask : task);
 
     this._tasksListService.updateTask(updatedTask);
-    this._tasksListChannelBroadcast.sendMessage(this.nameChannel, { type: 'UPDATE', task: updatedTask,});
+    this._tasksListChannelBroadcast.sendMessage(this.nameChannel, { type: 'UPDATE', task: updatedTask });
+    this._tasksListChannelBroadcast.sendMessage(this.nameChannel, {
+      type: 'SYNC',
+      tasks: [...this.tasks]
+    });
   }
 
   public deleteTask(task: Task): void {
-    this.tasks = this.tasks.filter(task => task.id !== task.id);
-
+    this.tasks = this.tasks.filter(t => t.id !== task.id);
     this._tasksListService.deleteTask(task.id);
-    this._tasksListChannelBroadcast.sendMessage(this.nameChannel, { type: 'REMOVE', task: task });
+
+    this._tasksListChannelBroadcast.sendMessage(this.nameChannel, { type: 'REMOVE', task: task, tasks: this.tasks });
+    this._tasksListChannelBroadcast.sendMessage(this.nameChannel, {
+      type: 'SYNC',
+      tasks: this.tasks
+    });
   }
 }
