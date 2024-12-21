@@ -3,6 +3,11 @@ import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   {
+    path: '',
+    redirectTo: 'tasks-list',
+    pathMatch: 'full'
+  },
+  {
     path: 'tasks-list',
     loadChildren: () =>
       import('./modules/tasks-list/tasks-list.module').then((m) => m.TasksListModule),

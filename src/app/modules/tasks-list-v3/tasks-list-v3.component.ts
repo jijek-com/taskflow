@@ -44,27 +44,28 @@ export class TasksListV3Component implements OnInit, OnDestroy {
               }
               break;
             case 'UPDATE':
+
               if (message.data.task) {
                 this._tasksListService.updateTask(message.data.task);
-                this.tasks = this.tasks.map(task => task.id === message.data.task?.id ? message.data.task : task);
+                this.tasks = [...message.data.tasks || []];
                 this._cdr.detectChanges();
               }
+              console.log('UPDATE', this.tasks, message.data.tasks);
               break;
             case 'REMOVE':
+
               if (message.data.task) {
                 this._tasksListService.deleteTask(message.data.task.id);
-                this.tasks = this.tasks.filter(task => task.id !== message.data.task?.id);
+                this.tasks = [...message.data.tasks || []];
                 this._cdr.detectChanges();
               }
               break;
             case 'SYNC_REQUEST':
-              if (this.tasks.length > 0) {
                 this._tasksListChannelBroadcast.sendMessage(this.nameChannel, {
                   type: 'SYNC',
                   tasks: [...this.tasks]
                 });
                 this._cdr.detectChanges();
-              }
               break;
             case 'SYNC':
               if (message.data.tasks && !this.isSynced) {
@@ -81,7 +82,6 @@ export class TasksListV3Component implements OnInit, OnDestroy {
     this._tasksListChannelBroadcast.sendMessage(this.nameChannel, { type: 'SYNC_REQUEST', tasks: [] });
 
     this._tasksListService.tasks$.pipe(takeUntil(this.destroy$)).subscribe((tasks) => {
-
       if (!this.isSynced) {
         this.tasks = tasks;
         this._cdr.detectChanges();
@@ -121,6 +121,7 @@ export class TasksListV3Component implements OnInit, OnDestroy {
       type: 'SYNC',
       tasks: this.tasks
     });
+    this.isSynced = true
   }
 
   public openEditModal(task: Task): void {
@@ -146,6 +147,7 @@ export class TasksListV3Component implements OnInit, OnDestroy {
       type: 'SYNC',
       tasks: [...this.tasks]
     });
+    this.isSynced = true
   }
 
   public deleteTask(task: Task): void {
@@ -157,5 +159,6 @@ export class TasksListV3Component implements OnInit, OnDestroy {
       type: 'SYNC',
       tasks: this.tasks
     });
+    this.isSynced = true
   }
 }
