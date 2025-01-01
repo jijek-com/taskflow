@@ -21,6 +21,11 @@ const routes: Routes = [
     path: 'tasks-list-v3',
     loadChildren: () =>
       import('./modules/tasks-list-v3/tasks-list-v3.module').then((m) => m.TasksListV3Module),
+  },
+  {
+    path: 'tasks-list-v4',
+    loadChildren: () =>
+      import('./modules/tasks-list-v4/tasks-list-v4.module').then((m) => m.TasksListV4Module),
   }
 ];
 

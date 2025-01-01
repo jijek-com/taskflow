@@ -1,0 +1,87 @@
+<div class="actions">
+  <button nz-button nzType="primary" (click)="openModal()">Добавить задачу</button>
+</div>
+
+<nz-list [nzDataSource]="tasks" [nzBordered]="true" [nzRenderItem]="item">
+  <ng-template #item let-task>
+    <nz-list-item>
+      <nz-list-item-meta [nzTitle]="task.title" [nzDescription]="task.description"></nz-list-item-meta>
+      <div>
+          <span
+            [ngClass]="{
+              'status-completed': task.status === 'completed',
+              'status-in-progress': task.status === 'in-progress',
+              'status-pending': task.status === 'pending'
+            }"
+          > {{ statusesTranslations[task.status] }} </span>
+      </div>
+      <button
+        nz-button
+        nzType="link"
+        (click)="openModal(task)"
+        title="Редактировать"
+      >
+        <i nz-icon nzType="edit" nzTheme="outline"></i>
+      </button>
+      <button
+        nz-button
+        nzType="link"
+        nzDanger
+        (click)="deleteTask(task.id)"
+        title="Удалить"
+      >
+        <i nz-icon nzType="delete" nzTheme="outline"></i>
+      </button>
+    </nz-list-item>
+  </ng-template>
+</nz-list>
+
+<nz-modal
+  [(nzVisible)]="isModalVisible"
+  [nzTitle]="isEditing ? 'Редактировать задачу' : 'Добавить задачу'"
+  (nzOnCancel)="closeModal()"
+  [nzFooter]="null"
+>
+  <div class="modal__body" *nzModalContent>
+    <form [formGroup]="taskForm">
+
+      <nz-form-item>
+        <nz-form-label [nzSpan]="6">Название</nz-form-label>
+        <nz-form-control [nzSpan]="14">
+          <input nz-input formControlName="title" placeholder="Название" />
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label [nzSpan]="6">Описание</nz-form-label>
+        <nz-form-control [nzSpan]="14">
+          <textarea nz-input formControlName="description" placeholder="Описание"></textarea>
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label [nzSpan]="6">Статус</nz-form-label>
+        <nz-form-control [nzSpan]="14">
+          <nz-select formControlName="status">
+            <nz-option nzValue="completed" nzLabel="Завершено"></nz-option>
+            <nz-option nzValue="in-progress" nzLabel="В процессе"></nz-option>
+            <nz-option nzValue="pending" nzLabel="Ожидает"></nz-option>
+          </nz-select>
+        </nz-form-control>
+      </nz-form-item>
+
+      <div class="modal-footer">
+        <button nz-button nzType="default" (click)="closeModal()">Отмена</button>
+        <button
+          nz-button
+          nzType="primary"
+          (click)="isEditing ? updateTask(taskForm.getRawValue()) : addTask(taskForm.getRawValue())"
+          [disabled]="!taskForm.valid"
+        >
+          {{ isEditing ? 'Сохранить изменения' : 'Добавить задачу' }}
+        </button>
+      </div>
+    </form>
+  </div>
+</nz-modal>
+
