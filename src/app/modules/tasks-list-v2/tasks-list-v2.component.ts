@@ -1,9 +1,9 @@
 import { Component, OnDestroy, type OnInit } from '@angular/core';
-import { Subject, takeUntil } from "rxjs";
+import { Subject, takeUntil } from 'rxjs';
 
-import { TasksListV2Service } from "./tasks-list-v2-service";
+import { TasksListV2Service } from './tasks-list-v2-service';
 
-import { Statuses_Translations } from "../tasks-list/tasks-list-translations";
+import { Statuses_Translations } from '../tasks-list/tasks-list-translations';
 import { Task } from 'src/app/types/tasks.type';
 
 @Component({
@@ -13,12 +13,22 @@ import { Task } from 'src/app/types/tasks.type';
 })
 export class TasksListV2Component implements OnInit, OnDestroy {
   public taskList: Task[] = [
-    { id: 1, title: 'Задача 1', description: 'Описание 1', status: 'completed' },
-    { id: 2, title: 'Задача 2', description: 'Описание 2', status: 'in-progress' },
-    { id: 3, title: 'Задача 3', description: 'Описание 3', status: 'pending' },
+    {
+      id: 1,
+      title: 'Задача 1',
+      description: 'Описание 1',
+      status: 'completed'
+    },
+    {
+      id: 2,
+      title: 'Задача 2',
+      description: 'Описание 2',
+      status: 'in-progress'
+    },
+    { id: 3, title: 'Задача 3', description: 'Описание 3', status: 'pending' }
   ];
 
-  public tasks: Task[] = []
+  public tasks: Task[] = [];
 
   public selectedTask: Task | null = null;
   public isAddModalVisible = false;
@@ -28,13 +38,15 @@ export class TasksListV2Component implements OnInit, OnDestroy {
   public destroy$ = new Subject<void>();
 
   constructor(private _taskStateService: TasksListV2Service) {
-    this._taskStateService.setTasks(this.taskList)
+    this._taskStateService.setTasks(this.taskList);
   }
 
   public ngOnInit(): void {
-    this._taskStateService.tasks$.pipe(takeUntil(this.destroy$)).subscribe(tasks => {
-      this.tasks = tasks;
-    });
+    this._taskStateService.tasks$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((tasks) => {
+        this.tasks = tasks;
+      });
   }
 
   public ngOnDestroy(): void {

@@ -2,13 +2,15 @@ import {
   ChangeDetectionStrategy,
   Component,
   EventEmitter,
-  Input, OnChanges,
-  Output, SimpleChanges
+  Input,
+  OnChanges,
+  Output,
+  SimpleChanges
 } from '@angular/core';
 
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
-import { Statuses_Translations } from "../tasks-list-translations";
+import { Statuses_Translations } from '../tasks-list-translations';
 import { Task } from 'src/app/types/tasks.type';
 
 @Component({

@@ -10,17 +10,23 @@ const routes: Routes = [
   {
     path: 'tasks-list',
     loadChildren: () =>
-      import('./modules/tasks-list/tasks-list.module').then((m) => m.TasksListModule),
+      import('./modules/tasks-list/tasks-list.module').then(
+        (m) => m.TasksListModule
+      )
   },
   {
     path: 'tasks-list-v2',
     loadChildren: () =>
-      import('./modules/tasks-list-v2/tasks-list-v2.module').then((m) => m.TasksListV2Module),
+      import('./modules/tasks-list-v2/tasks-list-v2.module').then(
+        (m) => m.TasksListV2Module
+      )
   },
   {
     path: 'tasks-list-v3',
     loadChildren: () =>
-      import('./modules/tasks-list-v3/tasks-list-v3.module').then((m) => m.TasksListV3Module),
+      import('./modules/tasks-list-v3/tasks-list-v3.module').then(
+        (m) => m.TasksListV3Module
+      )
   }
 ];
 
@@ -28,4 +34,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

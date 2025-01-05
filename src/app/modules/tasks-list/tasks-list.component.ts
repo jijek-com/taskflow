@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { Statuses_Translations } from "./tasks-list-translations";
+import { Statuses_Translations } from './tasks-list-translations';
 import { Task } from 'src/app/types/tasks.type';
 
 @Component({
@@ -10,9 +10,19 @@ import { Task } from 'src/app/types/tasks.type';
 })
 export class TasksListComponent {
   public tasks: Task[] = [
-    { id: 1, title: 'Задача 1', description: 'Описание 1', status: 'completed' },
-    { id: 2, title: 'Задача 2', description: 'Описание 2', status: 'in-progress' },
-    { id: 3, title: 'Задача 3', description: 'Описание 3', status: 'pending' },
+    {
+      id: 1,
+      title: 'Задача 1',
+      description: 'Описание 1',
+      status: 'completed'
+    },
+    {
+      id: 2,
+      title: 'Задача 2',
+      description: 'Описание 2',
+      status: 'in-progress'
+    },
+    { id: 3, title: 'Задача 3', description: 'Описание 3', status: 'pending' }
   ];
   public selectedTask: Task | null = null;
 
@@ -29,7 +39,9 @@ export class TasksListComponent {
   }
 
   public addTask(newTask: any): void {
-    newTask.id = this.tasks.length ? Math.max(...this.tasks.map((t) => t.id)) + 1 : 1;
+    newTask.id = this.tasks.length
+      ? Math.max(...this.tasks.map((t) => t.id)) + 1
+      : 1;
     this.tasks = [...this.tasks, newTask];
 
     this.closeAddModal();

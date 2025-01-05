@@ -1,5 +1,11 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  Output
+} from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-task-add',
@@ -18,7 +24,7 @@ export class TaskAddComponent {
     this.taskForm = this.fb.group({
       title: ['', Validators.required],
       description: [''],
-      status: ['pending', Validators.required],
+      status: ['pending', Validators.required]
     });
   }
 

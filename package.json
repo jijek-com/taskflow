@@ -7,7 +7,18 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "prettier-run": "npx prettier --write \"**/*.scss\""
+    "format": "prettier --write ."
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.js": "prettier --write",
+    "*.ts": "prettier --write",
+    "*.scss": "prettier --write",
+    "*.css": "prettier --write"
   },
   "private": true,
   "dependencies": {

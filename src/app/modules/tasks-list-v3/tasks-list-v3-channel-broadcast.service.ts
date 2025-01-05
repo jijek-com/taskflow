@@ -1,6 +1,6 @@
-import { Injectable } from "@angular/core";
-import { BroadcastMessage, TaskOperation } from "../../types/tasks.type";
-import { Observable, Subject } from "rxjs";
+import { Injectable } from '@angular/core';
+import { BroadcastMessage, TaskOperation } from '../../types/tasks.type';
+import { Observable, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -47,7 +47,8 @@ export class TasksListChannelBroadcastService {
       channel.removeEventListener('message', this.listeners.get(channelName)!);
     }
 
-    const listener = (event: MessageEvent) => callback(event.data as BroadcastMessage<T>);
+    const listener = (event: MessageEvent) =>
+      callback(event.data as BroadcastMessage<T>);
     channel.addEventListener('message', listener);
 
     this.listeners.set(channelName, listener);
@@ -64,6 +65,8 @@ export class TasksListChannelBroadcastService {
   private initChannel(name: string): void {
     const channel = new BroadcastChannel(name);
     this.channels.set(name, channel);
-    channel.addEventListener('message', (event) => this._messages$.next(event.data));
+    channel.addEventListener('message', (event) =>
+      this._messages$.next(event.data)
+    );
   }
 }

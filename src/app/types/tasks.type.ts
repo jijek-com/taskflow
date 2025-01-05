@@ -10,7 +10,12 @@ export interface BroadcastMessage<T> {
   data: T;
 }
 
-export type TaskOperationType = 'ADD' | 'REMOVE' | 'UPDATE' | 'SYNC_REQUEST' | 'SYNC';
+export type TaskOperationType =
+  | 'ADD'
+  | 'REMOVE'
+  | 'UPDATE'
+  | 'SYNC_REQUEST'
+  | 'SYNC';
 
 export interface TaskOperation {
   type: TaskOperationType;

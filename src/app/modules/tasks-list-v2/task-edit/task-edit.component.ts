@@ -1,8 +1,15 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, Output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  Output
+} from '@angular/core';
 import { Task } from 'src/app/types/tasks.type';
-import { Statuses_Translations } from "../../tasks-list/tasks-list-translations";
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { TasksListV2Service } from "../tasks-list-v2-service";
+import { Statuses_Translations } from '../../tasks-list/tasks-list-translations';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { TasksListV2Service } from '../tasks-list-v2-service';
 
 @Component({
   selector: 'app-task-edit',
@@ -20,7 +27,10 @@ export class TaskEditComponent implements OnChanges {
 
   public form!: FormGroup;
 
-  constructor(private _fb: FormBuilder, private _taskStateService: TasksListV2Service) {
+  constructor(
+    private _fb: FormBuilder,
+    private _taskStateService: TasksListV2Service
+  ) {
     this.form = this._fb.group({
       title: ['', Validators.required],
       description: [''],

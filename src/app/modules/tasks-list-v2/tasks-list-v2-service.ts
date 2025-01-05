@@ -1,6 +1,6 @@
-import { Injectable } from "@angular/core";
-import { BehaviorSubject } from "rxjs";
-import { Task } from "src/app/types/tasks.type";
+import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
+import { Task } from 'src/app/types/tasks.type';
 
 @Injectable({
   providedIn: 'root'
@@ -16,13 +16,17 @@ export class TasksListV2Service {
   public addTask(task: Task): void {
     const currentTasks = this.tasksListSubject.value;
 
-    task.id = currentTasks.length ? Math.max(...currentTasks.map((t) => t.id)) + 1 : 1;
+    task.id = currentTasks.length
+      ? Math.max(...currentTasks.map((t) => t.id)) + 1
+      : 1;
     this.tasksListSubject.next([...currentTasks, task]);
   }
 
   public updateTask(updatedTask: Task): void {
     const currentTasks = this.tasksListSubject.value;
-    const taskIndex = currentTasks.findIndex(task => task.id === updatedTask.id);
+    const taskIndex = currentTasks.findIndex(
+      (task) => task.id === updatedTask.id
+    );
     if (taskIndex !== -1) {
       currentTasks[taskIndex] = updatedTask;
       this.tasksListSubject.next([...currentTasks]);
@@ -31,7 +35,7 @@ export class TasksListV2Service {
 
   public deleteTask(taskId: number): void {
     const currentTasks = this.tasksListSubject.value;
-    const updatedTasks = currentTasks.filter(task => task.id !== taskId);
+    const updatedTasks = currentTasks.filter((task) => task.id !== taskId);
     this.tasksListSubject.next(updatedTasks);
   }
 }

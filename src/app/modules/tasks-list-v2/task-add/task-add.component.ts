@@ -1,6 +1,12 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { TasksListV2Service } from "../tasks-list-v2-service";
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  Output
+} from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { TasksListV2Service } from '../tasks-list-v2-service';
 
 @Component({
   selector: 'app-task-add',
@@ -14,11 +20,14 @@ export class TaskAddComponent {
 
   public taskForm: FormGroup;
 
-  constructor(private _fb: FormBuilder, private _taskStateService: TasksListV2Service) {
+  constructor(
+    private _fb: FormBuilder,
+    private _taskStateService: TasksListV2Service
+  ) {
     this.taskForm = this._fb.group({
       title: ['', Validators.required],
       description: [''],
-      status: ['pending', Validators.required],
+      status: ['pending', Validators.required]
     });
   }
 

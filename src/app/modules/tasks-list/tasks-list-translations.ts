@@ -1,5 +1,5 @@
 export const Statuses_Translations: { [key: string]: string } = {
-  'completed': 'Завершено',
+  completed: 'Завершено',
   'in-progress': 'В процессе',
-  'pending': 'Ожидание'
+  pending: 'Ожидание'
 };

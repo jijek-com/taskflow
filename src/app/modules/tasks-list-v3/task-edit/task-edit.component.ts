@@ -1,7 +1,14 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, Output } from '@angular/core';
-import { Task } from "../../../types/tasks.type";
-import { Statuses_Translations } from "../../tasks-list/tasks-list-translations";
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  Output
+} from '@angular/core';
+import { Task } from '../../../types/tasks.type';
+import { Statuses_Translations } from '../../tasks-list/tasks-list-translations';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-task-edit',
