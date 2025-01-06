@@ -38,7 +38,7 @@ export class TasksListComponent {
     this.isAddModalVisible = false;
   }
 
-  public addTask(newTask: any): void {
+  public addTask(newTask: Task): void {
     newTask.id = this.tasks.length
       ? Math.max(...this.tasks.map((t) => t.id)) + 1
       : 1;

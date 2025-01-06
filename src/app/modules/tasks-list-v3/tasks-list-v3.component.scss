@@ -3,3 +3,15 @@
   display: flex;
   justify-content: flex-end;
 }
+
+.status-completed {
+  color: green;
+}
+
+.status-in-progress {
+  color: orange;
+}
+
+.status-pending {
+  color: red;
+}

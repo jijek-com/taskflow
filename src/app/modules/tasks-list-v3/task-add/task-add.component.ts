@@ -6,6 +6,7 @@ import {
   Output
 } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Task } from 'src/app/types/tasks.type';
 
 @Component({
   selector: 'app-task-add',
@@ -17,7 +18,7 @@ export class TaskAddComponent {
   @Input() public isVisible = false;
   @Input() public nameChannel = '';
   @Output() public onCancel = new EventEmitter<void>();
-  @Output() public onSave = new EventEmitter<any>();
+  @Output() public onSave = new EventEmitter<Task>();
 
   public taskForm: FormGroup;
 

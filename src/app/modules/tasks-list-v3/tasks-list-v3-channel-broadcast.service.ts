@@ -7,18 +7,18 @@ import { Observable, Subject } from 'rxjs';
 })
 export class TasksListChannelBroadcastService {
   private channels = new Map<string, BroadcastChannel>();
-  private _messages$ = new Subject<BroadcastMessage<any>>();
-  private listeners = new Map<string, any>();
+  private _messages$ = new Subject<BroadcastMessage<TaskOperation>>();
+  private listeners = new Map<string, (e: MessageEvent) => void>();
 
   constructor() {
     this.initChannel('tasks-list-channel');
   }
 
-  public get messages$(): Observable<BroadcastMessage<any>> {
+  public get messages$(): Observable<BroadcastMessage<TaskOperation>> {
     return this._messages$.asObservable();
   }
 
-  public connectChannel<T>(name: string): BroadcastChannel {
+  public connectChannel(name: string): BroadcastChannel {
     if (!this.channels.has(name)) {
       this.initChannel(name);
     }
