@@ -8,10 +8,11 @@ import {
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
-  selector: 'app-task-add',
-  templateUrl: './task-add.component.html',
-  styleUrls: ['./task-add.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'app-task-add',
+    templateUrl: './task-add.component.html',
+    styleUrls: ['./task-add.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class TaskAddComponent {
   @Input() public isVisible = false;

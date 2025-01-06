@@ -7,9 +7,10 @@ import { Statuses_Translations } from '../tasks-list/tasks-list-translations';
 import { Task } from 'src/app/types/tasks.type';
 
 @Component({
-  selector: 'app-tasks-list-v2',
-  templateUrl: './tasks-list-v2.component.html',
-  styleUrls: ['./tasks-list-v2.component.scss']
+    selector: 'app-tasks-list-v2',
+    templateUrl: './tasks-list-v2.component.html',
+    styleUrls: ['./tasks-list-v2.component.scss'],
+    standalone: false
 })
 export class TasksListV2Component implements OnInit, OnDestroy {
   public taskList: Task[] = [

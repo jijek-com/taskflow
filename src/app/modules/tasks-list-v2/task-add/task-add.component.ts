@@ -9,10 +9,11 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { TasksListV2Service } from '../tasks-list-v2-service';
 
 @Component({
-  selector: 'app-task-add',
-  templateUrl: './task-add.component.html',
-  styleUrls: ['./task-add.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'app-task-add',
+    templateUrl: './task-add.component.html',
+    styleUrls: ['./task-add.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class TaskAddComponent {
   @Input() public isVisible = false;

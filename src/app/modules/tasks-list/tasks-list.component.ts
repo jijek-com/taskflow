@@ -3,10 +3,11 @@ import { Statuses_Translations } from './tasks-list-translations';
 import { Task } from 'src/app/types/tasks.type';
 
 @Component({
-  selector: 'app-tasks-list',
-  templateUrl: './tasks-list.component.html',
-  styleUrls: ['./tasks-list.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'app-tasks-list',
+    templateUrl: './tasks-list.component.html',
+    styleUrls: ['./tasks-list.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class TasksListComponent {
   public tasks: Task[] = [
