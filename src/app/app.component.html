@@ -37,15 +37,8 @@
   <nz-layout>
     <nz-header>
       <div class="app-header">
-        <span
-          class="header-trigger"
-          (click)="isCollapsed = !isCollapsed"
-          aria-label="Toggle menu"
-        >
-          <span
-            class="trigger"
-            nz-icon
-            [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"
+        <span class="header-trigger" (click)="isCollapsed = !isCollapsed" aria-label="Toggle menu">
+          <span class="trigger" nz-icon [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"
           ></span>
         </span>
       </div>
