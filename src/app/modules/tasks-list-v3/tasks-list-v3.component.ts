@@ -12,10 +12,11 @@ import { TasksListV3Service } from './tasks-list-v3.service';
 import { Subject, takeUntil } from 'rxjs';
 
 @Component({
-  selector: 'app-tasks-list-v3',
-  templateUrl: './tasks-list-v3.component.html',
-  styleUrls: ['./tasks-list-v3.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'app-tasks-list-v3',
+    templateUrl: './tasks-list-v3.component.html',
+    styleUrls: ['./tasks-list-v3.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class TasksListV3Component implements OnInit, OnDestroy {
   public nameChannel: string = 'tasks-list-channel';
