@@ -27,7 +27,8 @@
           <li nz-menu-item [nzSelected]="isCurrentRoute('/tasks-list-v2')">
             <a routerLink="/tasks-list-v2">Задачи (observer)</a>
           </li>
-          <li nz-menu-item [nzSelected]="isCurrentRoute('/tasks-list-v3')"><a routerLink="/tasks-list-v3">Задачи (BroadcastChannel)</a>
+          <li nz-menu-item [nzSelected]="isCurrentRoute('/tasks-list-v3')">
+            <a routerLink="/tasks-list-v3">Задачи (BroadcastChannel)</a>
           </li>
         </ul>
       </li>
@@ -36,8 +37,15 @@
   <nz-layout>
     <nz-header>
       <div class="app-header">
-        <span class="header-trigger" (click)="isCollapsed = !isCollapsed" aria-label="Toggle menu">
-          <span class="trigger" nz-icon [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"
+        <span
+          class="header-trigger"
+          (click)="isCollapsed = !isCollapsed"
+          aria-label="Toggle menu"
+        >
+          <span
+            class="trigger"
+            nz-icon
+            [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"
           ></span>
         </span>
       </div>
