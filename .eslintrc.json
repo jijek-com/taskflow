@@ -6,7 +6,8 @@
   },
   "extends": [
     "eslint:recommended",
-    "plugin:@typescript-eslint/recommended"
+    "plugin:@typescript-eslint/recommended",
+    "stylelint-config-standard"
   ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
@@ -21,37 +22,58 @@
     "quotes": ["error", "single"],
     "no-console": "warn",
     "indent": ["error", 2],
-    "component-class-suffix": true,
-    "component-max-inline-declarations": true,
-    "component-selector": [true, "element", "sg", "kebab-case"],
-    "contextual-lifecycle": true,
-    "directive-class-suffix": true,
-    "directive-selector": [true, "attribute", "sg", "camelCase"],
-    "no-attribute-decorator": true,
-    "no-conflicting-lifecycle": true,
-    "no-forward-ref": true,
-    "no-host-metadata-property": true,
-    "no-input-rename": true,
-    "no-inputs-metadata-property": true,
-    "no-lifecycle-call": true,
-    "no-output-native": true,
-    "no-output-on-prefix": true,
-    "no-output-rename": true,
-    "no-outputs-metadata-property": true,
-    "no-pipe-impure": true,
-    "no-queries-metadata-property": true,
-    "no-unused-css": true,
-    "prefer-inline-decorator": true,
-    "prefer-output-readonly": true,
-    "template-banana-in-box": true,
-    "template-conditional-complexity": [true, 4],
-    "template-cyclomatic-complexity": [true, 5],
-    "template-i18n": [true, "check-id", "check-text"],
-    "template-no-negated-async": true,
-    "template-use-track-by-function": true,
-    "use-component-selector": true,
-    "use-component-view-encapsulation": true,
-    "use-lifecycle-interface": true,
-    "use-pipe-transform-interface": true
+    "stylelint/at-rule-no-unknown": [
+      "error",
+      {
+        "ignoreAtRules": ["define-mixin", "mixin", "include", "extend", "each", "for"]
+      }
+    ],
+    "stylelint/font-family-name-quotes": "always-unless-keyword",
+    "stylelint/function-url-quotes": "always",
+    "stylelint/selector-attribute-quotes": "always",
+    "stylelint/string-quotes": "single",
+    "stylelint/at-rule-no-vendor-prefix": "error",
+    "stylelint/media-feature-name-no-vendor-prefix": "error",
+    "stylelint/property-no-vendor-prefix": "error",
+    "stylelint/selector-no-vendor-prefix": "error",
+    "stylelint/value-no-vendor-prefix": "error",
+    "stylelint/max-nesting-depth": ["error", 4],
+    "stylelint/selector-max-specificity": ["error", "1,2,1"],
+    "stylelint/color-named": "never",
+    "stylelint/color-no-hex": "error",
+    "stylelint/declaration-no-important": "error",
+    "stylelint/declaration-property-unit-whitelist": [
+      {
+        "font-size": ["rem", "em"],
+        "/^animation/": ["s"]
+      }
+    ],
+    "stylelint/number-leading-zero": "never",
+    "stylelint/order/properties-alphabetical-order": "error",
+    "stylelint/selector-max-type": ["error", 1],
+    "stylelint/selector-type-no-unknown": [
+      "error",
+      {
+        "ignore": ["custom-elements"]
+      }
+    ],
+    "stylelint/font-weight-notation": "numeric",
+    "stylelint/function-url-no-scheme-relative": "error",
+    "stylelint/max-line-length": [
+      "error",
+      {
+        "ignore": ["comments"]
+      }
+    ],
+    "stylelint/indentation": ["error", 4],
+    "stylelint/rule-empty-line-before": "off",
+    "stylelint/declaration-empty-line-before": "off",
+    "stylelint/no-empty-source": "off",
+    "stylelint/selector-combinator-space-after": "off",
+    "stylelint/selector-max-compound-selectors": ["error", 5],
+    "stylelint/at-rule-empty-line-before": "off",
+    "stylelint/function-calc-no-unspaced-operator": "off",
+    "stylelint/font-weight-notation": "off",
+    "stylelint/font-family-no-missing-generic-family-keyword": "off"
   }
 }

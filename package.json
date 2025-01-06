@@ -12,12 +12,18 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lint"
+      "pre-commit": "lint-staged"
     }
   },
   "lint-staged": {
-    "*.js": "prettier --write",
-    "*.ts": "prettier --write",
+    "*.js": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.ts": [
+      "eslint --fix",
+      "prettier --write"
+    ],
     "*.scss": "prettier --write",
     "*.css": "prettier --write"
   },
@@ -43,6 +49,7 @@
     "@angular/cli": "^19.0.6",
     "@angular/compiler-cli": "^19.0.5",
     "@types/jasmine": "^5.1.5",
+    "eslint-plugin-stylelint": "^0.1.1",
     "husky": "^9.1.7",
     "jasmine-core": "^5.5.0",
     "karma": "~6.4.0",
@@ -54,6 +61,7 @@
     "less-loader": "^12.2.0",
     "lint-staged": "^15.3.0",
     "prettier": "^3.4.2",
+    "stylelint-config-standard": "^36.0.1",
     "typescript": "5.6",
     "typescript-eslint": "^8.19.0"
   }
