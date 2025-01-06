@@ -18,7 +18,7 @@ export class TasksListChannelBroadcastService {
     return this._messages$.asObservable();
   }
 
-  public connectChannel(name: any): BroadcastChannel {
+  public connectChannel(name: string): BroadcastChannel {
     if (!this.channels.has(name)) {
       this.initChannel(name);
     }

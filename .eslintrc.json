@@ -73,7 +73,6 @@
     "stylelint/selector-max-compound-selectors": ["error", 5],
     "stylelint/at-rule-empty-line-before": "off",
     "stylelint/function-calc-no-unspaced-operator": "off",
-    "stylelint/font-weight-notation": "off",
     "stylelint/font-family-no-missing-generic-family-keyword": "off"
   }
 }
