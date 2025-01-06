@@ -14,10 +14,11 @@ import { Statuses_Translations } from '../tasks-list-translations';
 import { Task } from 'src/app/types/tasks.type';
 
 @Component({
-  selector: 'app-task-edit',
-  templateUrl: './task-edit.component.html',
-  styleUrls: ['./task-edit.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'app-task-edit',
+    templateUrl: './task-edit.component.html',
+    styleUrls: ['./task-edit.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class TaskEditComponent implements OnChanges {
   @Input() public isVisible = false;
